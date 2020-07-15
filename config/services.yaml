@@ -25,3 +25,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\SpotifyApiHelper:
+        arguments:
+            $apiClientId: '%env(SPOTIFY_CLIENT_ID)%'
+            $apiClientSecret: '%env(SPOTIFY_CLIENT_SECRET)%'
+            $scope: '%env(SPOTIFY_SCOPE)%'
