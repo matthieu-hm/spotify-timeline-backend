@@ -48,7 +48,7 @@ class SpotifyApiController extends AbstractController
         $accessTokenCookie = Cookie::create('access_token', $data['access_token'], strtotime($data['expires_in'] . ' seconds'), '/', 'localhost', null, false);
         $refreshTokenCookie = Cookie::create('refresh_token', $data['refresh_token'], strtotime('tomorrow'), '/', 'localhost', null, false);
 
-        $response = $this->json($data);
+        $response = $this->render('spotify-api/auth-success.html.twig');
         $response->headers->setCookie($accessTokenCookie);
         $response->headers->setCookie($refreshTokenCookie);
 
