@@ -54,4 +54,23 @@ class SpotifyApiController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route(
+     *      "/refresh-token",
+     *      name="spotify-api-refresh-auth-token"
+     * )
+     */
+    public function refreshAuthToken(Request $request)
+    {
+        $refreshToken = $request->query->get('refresh_token');
+        $data = $this->spotifyApiHelper->getTokenFromRefreshToken($refreshToken);
+
+        $accessTokenCookie = Cookie::create('access_token', $data['access_token'], strtotime($data['expires_in'] . ' seconds'), '/', 'localhost', null, false);
+
+        $response = $this->json($data);
+        $response->headers->setCookie($accessTokenCookie);
+
+        return $response;
+    }
 }

@@ -51,4 +51,21 @@ class SpotifyApiHelper
 
         return json_decode($response->getBody(), true);
     }
+
+    public function getTokenFromRefreshToken($refreshToken)
+    {
+        $client = new Client();
+        $response = $client->post(
+            self::AUTH_SERVICE_URL . 'api/token',
+            [
+                'auth' => [$this->apiClientId, $this->apiClientSecret],
+                'form_params' => [
+                    'grant_type' => 'refresh_token',
+                    'refresh_token' => $refreshToken
+                ]
+            ]
+        );
+
+        return json_decode($response->getBody(), true);
+    }
 }
