@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Service\SpotifyApiHelper;
@@ -26,7 +25,8 @@ class SpotifyApiController extends AbstractController
     /**
      * @Route(
      *      "/login",
-     *      name="spotify-api-login"
+     *      name="spotify-api-login",
+     *      stateless=true
      * )
      */
     public function login(Request $request)
@@ -37,7 +37,8 @@ class SpotifyApiController extends AbstractController
     /**
      * @Route(
      *      "/auth-callback",
-     *      name="spotify-api-auth-callback"
+     *      name="spotify-api-auth-callback",
+     *      stateless=true
      * )
      */
     public function authCallback(Request $request)
@@ -58,7 +59,8 @@ class SpotifyApiController extends AbstractController
     /**
      * @Route(
      *      "/refresh-token",
-     *      name="spotify-api-refresh-auth-token"
+     *      name="spotify-api-refresh-auth-token",
+     *      stateless=true
      * )
      */
     public function refreshAuthToken(Request $request)
